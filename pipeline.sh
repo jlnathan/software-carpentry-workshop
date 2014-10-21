@@ -19,4 +19,13 @@ do
 done
 
 echo Available .csv files
-ls *.csv
+ls *.csv 
+
+# ipython analyze_mosquito_data_script.py A2_mosquito_data.csv
+for f in *data.csv
+do
+	ipython analyze_mosquito_data_script.py $f
+done
+
+mv *png figures/
+mv *parameters.csv parameters/
