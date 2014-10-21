@@ -1,21 +1,22 @@
+import sys
 import pandas as pd
 import analyze_mosquito_data_lib as mosquito_lib
-import statsmodels.api as sm
-import matplotlib.pyplot as plt
 
-filename = "A1_mosquito_data.csv"
-figure_filename = "plot.png"
+filename = sys.argv[1]
 
 # read the data
 data = pd.read_csv(filename)
-print data.head()
+print "Analyzing", filename
 
 # celsius to fahrenheit
 data["temperature"] = mosquito_lib.fahr_to_celsius(data["temperature"])
-parameters = mosquito_lib.analyze(data,figure_filename)
 
+print "Running analyze"
+parameters = mosquito_lib.analyze(data,filename.replace("csv","png"))
+
+print "Saving parameters"
 # save parameters to file
-parameters.to_csv("parameters.csv")
+parameters.to_csv(filename.replace("data","parameters"))
 
 # c:/anaconda/scripts/ipython.exe analyze_mosquito_data_script.py
 
